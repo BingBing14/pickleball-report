@@ -1,0 +1,48 @@
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="label">Section 01 of 12 · Introduction / Tournament Information</p>
+      <h1>{{site.title}}</h1>
+      <p class="lead">On {{site.date}}, our group organized and officiated a one-day doubles pickleball tournament for the 12 players of Group 2, at the {{site.venue}}.</p>
+      <div class="btn-row">
+        <a class="btn" href="results.html">Results</a>
+        <a class="btn btn-ghost" href="format.html">How the tournament worked</a>
+      </div>
+    </div>
+    {{champion}}
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <dl class="stats">
+      <div><dt>Teams</dt><dd>6</dd></div>
+      <div><dt>Players</dt><dd>12</dd></div>
+      <div><dt>Matches</dt><dd>8</dd></div>
+      <div><dt>Courts</dt><dd>2</dd></div>
+    </dl>
+  </div>
+</section>
+
+<section class="section band">
+  <div class="wrap cols">
+    <div class="prose">
+      <h2>Introduction</h2>
+      <p>This website is the Tournament Report of {{site.group}}, section {{site.section}}, for {{site.course}}. As our capstone, the class planned and ran a pickleball tournament. This report covers how we planned it, how it ran on the day and how we evaluated it.</p>
+      <p>The class was split into two groups. First, we (Group 1, team color White) ran the bracket while Group 2's players competed. Then the groups switched roles: Group 2 ran a bracket and our members played in it. This report is about the tournament we organized.</p>
+      <p>Six doubles teams played two round-robin pools on two courts, followed by a Final and a third-place match. Play started at {{site.start}} and finished at {{site.end}}, inside our block of about one hour.</p>
+    </div>
+    <div>
+      <h2>Tournament information</h2>
+      {{facts}}
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <h2>Report sections</h2>
+    <p class="lead" style="margin-bottom:24px">Each required part of the report has its own page. Use the menu at the top or the links below.</p>
+    {{toc}}
+  </div>
+</section>

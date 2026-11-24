@@ -1,0 +1,23 @@
+{
+  "_note": "Single source of truth for scores. Standings and placings are computed by build.py. M5 was written 8-4 on the sheet; the group confirmed the game was to 7, so it is recorded as 7-4.",
+  "point_target": 7,
+  "time_cap_minutes": 6,
+  "teams": {
+    "A1": {"pool": "A", "players": ["Panganiban", "Paraase"]},
+    "A2": {"pool": "A", "players": ["Magbanua", "Olayvar"]},
+    "A3": {"pool": "A", "players": ["Marqueses", "Monzon"]},
+    "B1": {"pool": "B", "players": ["Mendoza", "Pangilinan"]},
+    "B2": {"pool": "B", "players": ["Reyes", "Regaya"]},
+    "B3": {"pool": "B", "players": ["Trangia", "Ong"]}
+  },
+  "matches": [
+    {"id": "M1", "round": 1, "court": 1, "stage": "Pool A", "home": "A2", "away": "A1", "score": [6, 1]},
+    {"id": "M2", "round": 1, "court": 2, "stage": "Pool B", "home": "B2", "away": "B1", "score": [5, 2]},
+    {"id": "M3", "round": 2, "court": 1, "stage": "Pool A", "home": "A1", "away": "A3", "score": [7, 4]},
+    {"id": "M4", "round": 2, "court": 2, "stage": "Pool B", "home": "B3", "away": "B1", "score": [7, 1]},
+    {"id": "M5", "round": 3, "court": 1, "stage": "Pool A", "home": "A2", "away": "A3", "score": [7, 4], "note": "Written as 8-4 on the score sheet; play went one point past the target of 7, so the result is recorded as 7-4."},
+    {"id": "M6", "round": 3, "court": 2, "stage": "Pool B", "home": "B3", "away": "B2", "score": [3, 1]},
+    {"id": "M7", "round": 4, "court": 1, "stage": "Final", "home": "A2", "away": "B3", "score": [7, 1]},
+    {"id": "M8", "round": 4, "court": 2, "stage": "3rd place", "home": "A1", "away": "B2", "score": [5, 2]}
+  ]
+}
