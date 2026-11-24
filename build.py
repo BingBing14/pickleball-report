@@ -135,7 +135,8 @@ def scoreboard(m):
     cap = chip(f"Ended at {CAP}-min cap", "chip-ink") if hit_time_cap(m) else chip(f"First to {TARGET}", "chip-ink")
     note = f'<p class="sb-note">{esc(m["note"])}</p>' if m.get("note") else ""
     return (
-        f'<article class="scoreboard" aria-label="{m["id"]}, {esc(m["stage"])}">'
+        f'<article class="scoreboard" aria-label="{m["id"]}, {esc(m["stage"])}" data-court="{m["court"]}" '
+        f'data-round="{m["round"]}" data-teams="{m["home"]} {m["away"]}">'
         f'<header class="sb-head"><span>{m["id"]} · {esc(m["stage"])}</span>'
         f'<span>Round {m["round"]} · Court {m["court"]}</span></header>'
         + "".join(rows)
@@ -155,7 +156,7 @@ def standings_table(pool):
     body = ""
     for r in STAND[pool]:
         d = f'+{r["diff"]}' if r["diff"] > 0 else str(r["diff"]).replace("-", "−")
-        body += (f'<tr><td class="num">{r["rank"]}</td><th scope="row"><span class="tid">{r["team"]}</span> '
+        body += (f'<tr data-team="{r["team"]}"><td class="num">{r["rank"]}</td><th scope="row"><span class="tid">{r["team"]}</span> '
                  f'{esc(team_name(r["team"]))}</th><td class="num">{r["w"]}–{r["l"]}</td>'
                  f'<td class="num">{r["pf"]}</td><td class="num">{r["pa"]}</td><td class="num">{d}</td></tr>')
     return (f'<div class="table-wrap"><table><caption>Pool {pool} standings (Court {1 if pool == "A" else 2})</caption>'
@@ -167,7 +168,7 @@ def placings_block():
     medals = ["gold", "silver", "bronze", "", "", ""]
     items = ""
     for i, tid in enumerate(PLACES):
-        items += (f'<li class="place place-{i + 1}"><span class="place-num {medals[i]}">{i + 1}</span>'
+        items += (f'<li class="place place-{i + 1}" data-team="{tid}"><span class="place-num {medals[i]}">{i + 1}</span>'
                   f'<span class="place-body"><span class="place-label">{labels[i]}</span>'
                   f'<span class="place-team">{esc(team_name(tid))}</span><span class="place-id">Team {tid}</span></span></li>')
     return f'<ol class="placings">{items}</ol>'
@@ -203,25 +204,100 @@ def schedule_table(with_results=True):
             f'<th scope="col">Stage</th><th scope="col">Teams</th>{rh}</tr></thead><tbody>{rows}</tbody></table></div>')
 
 
-def bracket():
-    def mini(pool):
-        lis = "".join(f'<li><span class="tid">{r["team"]}</span> {esc(team_name(r["team"]))}'
-                      f'<span class="br-rec">{r["w"]}–{r["l"]}</span></li>' for r in STAND[pool])
-        return (f'<div class="br-box"><p class="br-title">Pool {pool} · Court {1 if pool == "A" else 2}</p>'
-                f'<ol class="br-pool">{lis}</ol></div>')
+def tbtn(tid, label=None, cls="bk-t"):
+    """A team label that can be tapped to follow that team."""
+    return (f'<button type="button" class="{cls}" data-team="{tid}" data-pick="{tid}" '
+            f'aria-label="Follow team {tid}, {esc(team_name(tid))}">{esc(label or tid)}</button>')
 
-    def game(m, title):
+
+def bracket():
+    def pool_games(pool):
+        rows = ""
+        for m in (x for x in MATCHES if x["stage"] == f"Pool {pool}"):
+            w, _ = winner_loser(m)
+            sides = []
+            for tid, pts in ((m["home"], m["score"][0]), (m["away"], m["score"][1])):
+                sides.append(f'<span class="bk-side{" win" if tid == w else ""}">{tbtn(tid)}<span class="bk-pts" data-step="{m["round"]}">{pts}</span></span>')
+            rows += (f'<li class="bk-m" data-step="{m["round"]}" data-teams="{m["home"]} {m["away"]}">'
+                     f'<span class="bk-mid">{m["id"]}<span class="sr-only">, Round {m["round"]}:</span></span>{sides[0]}<span class="bk-vs" aria-hidden="true">–</span>{sides[1]}</li>')
+        return (f'<div class="bk-box" data-node="g{pool}"><p class="bk-title">Pool {pool} · Court {1 if pool == "A" else 2}</p>'
+                f'<ol class="bk-list">{rows}</ol></div>')
+
+    def pool_finish(pool):
+        slots = "".join(
+            f'<li class="bk-slot" data-node="s{pool}{r["rank"]}" data-team="{r["team"]}" data-step="3">'
+            f'<span class="bk-seed">{r["rank"]}</span>{tbtn(r["team"], team_name(r["team"]), "bk-name")}'
+            f'<span class="bk-rec">{r["w"]}–{r["l"]}</span></li>' for r in STAND[pool])
+        return (f'<div class="bk-box" data-node="s{pool}"><p class="bk-title">Pool {pool} finish</p>'
+                f'<ol class="bk-list">{slots}</ol></div>')
+
+    def game(m, title, node):
         w, _ = winner_loser(m)
         lines = "".join(
-            f'<li class="{"br-win" if t == w else ""}"><span class="tid">{t}</span> {esc(team_name(t))}<span class="br-pts">{p}</span></li>'
+            f'<li class="bk-slot{" win" if t == w else ""}" data-team="{t}"><span class="bk-seed">{t}</span>'
+            f'{tbtn(t, team_name(t), "bk-name")}<span class="bk-pts big" data-step="4">{p}</span></li>'
             for t, p in ((m["home"], m["score"][0]), (m["away"], m["score"][1])))
-        return f'<div class="br-box br-game"><p class="br-title">{title} · Court {m["court"]}</p><ul>{lines}</ul></div>'
+        return (f'<div class="bk-box bk-game" data-node="{node}" data-step="4"><p class="bk-title">{title}</p>'
+                f'<ol class="bk-list">{lines}</ol></div>')
 
-    return ('<div class="bracket" role="group" aria-label="Tournament bracket">'
-            f'<div class="br-col"><p class="br-step">Pool play · Rounds 1–3</p>{mini("A")}{mini("B")}</div>'
-            '<div class="br-arrow" aria-hidden="true"></div>'
-            f'<div class="br-col"><p class="br-step">Medal round · Round 4</p>'
-            f'{game(FINAL, "Final: A1st vs B1st")}{game(THIRD, "3rd place: A2nd vs B2nd")}</div></div>')
+    champ, runner = winner_loser(FINAL)
+    lower = "".join(f'<li data-team="{t}"><span>{i + 2}</span> {tbtn(t, team_name(t), "bk-name")}</li>' for i, t in enumerate(PLACES[1:]))
+    links = "gA>sA:3,gB>sB:3,sA1>final:4,sB1>final:4,sA2>third:4,sB2>third:4,final>champ:5"
+    return (
+        f'<div class="bk" data-bracket data-links="{links}">'
+        '<div class="bk-bar"><p class="bk-hint">Tap a team to follow it through the tournament.</p>'
+        '<button type="button" class="btn btn-ghost bk-replay">Replay the tournament</button></div>'
+        '<p class="sr-only bk-status" aria-live="polite"></p>'
+        '<div class="bk-grid" role="group" aria-label="Tournament bracket">'
+        f'<div class="bk-col"><p class="bk-step">Rounds 1–3 · Pool play</p>{pool_games("A")}{pool_games("B")}</div>'
+        f'<div class="bk-col"><p class="bk-step">Pool finish</p>{pool_finish("A")}{pool_finish("B")}</div>'
+        f'<div class="bk-col"><p class="bk-step">Round 4 · Medal round</p>'
+        f'{game(FINAL, "Final · Court 1", "final")}{game(THIRD, "3rd place · Court 2", "third")}'
+        '<p class="bk-note">Pool 3rd-place teams were placed 5th and 6th by wins, then point differential.</p></div>'
+        f'<div class="bk-col"><p class="bk-step">Champions</p>'
+        f'<div class="bk-box bk-champ" data-node="champ" data-team="{champ}" data-step="5">'
+        f'<p class="bk-title">1st place</p><p class="bk-champ-name">{tbtn(champ, team_name(champ), "bk-name")}</p>'
+        f'<ol class="bk-lower" start="2">{lower}</ol></div></div>'
+        '</div><svg class="bk-lines" aria-hidden="true"></svg></div>')
+
+
+def team_data():
+    data = {}
+    for tid, t in TEAMS.items():
+        row = next(r for r in STAND[t["pool"]] if r["team"] == tid)
+        ms = []
+        for m in MATCHES:
+            if tid not in (m["home"], m["away"]):
+                continue
+            us_home = m["home"] == tid
+            us, them = (m["score"] if us_home else m["score"][::-1])
+            opp = m["away"] if us_home else m["home"]
+            ms.append({"id": m["id"], "stage": m["stage"], "round": m["round"], "court": m["court"], "opp": opp,
+                       "oppName": team_name(opp), "us": us, "them": them, "won": us > them, "cap": hit_time_cap(m)})
+        w = sum(x["won"] for x in ms)
+        data[tid] = {"id": tid, "name": team_name(tid), "pool": t["pool"], "poolRank": row["rank"],
+                     "place": PLACES.index(tid) + 1, "w": w, "l": len(ms) - w,
+                     "pf": sum(x["us"] for x in ms), "pa": sum(x["them"] for x in ms), "matches": ms}
+    return '<script type="application/json" id="team-data">' + json.dumps(data, ensure_ascii=False).replace("</", "<\\/") + "</script>"
+
+
+def explorer():
+    chips = '<button type="button" class="pick" data-pick="" aria-pressed="true">All teams</button>' + "".join(
+        f'<button type="button" class="pick" data-pick="{t}" aria-pressed="false"><span class="tid">{t}</span>{esc(team_name(t))}</button>'
+        for t in PLACES)
+    return (f'<section class="explorer" data-explorer aria-labelledby="ex-h"><div class="explorer-top">'
+            f'<h2 id="ex-h">Follow a team</h2><p class="explorer-sub">Choose a team to highlight its matches, standings row and path in the bracket.</p></div>'
+            f'<div class="picks" role="group" aria-label="Choose a team">{chips}</div>'
+            f'<div class="team-card" hidden aria-live="polite"></div>{team_data()}</section>')
+
+
+def match_filters():
+    def group(label, key, values):
+        btns = f'<button type="button" class="pick sm" data-filter="{key}" data-value="" aria-pressed="true">All</button>' + "".join(
+            f'<button type="button" class="pick sm" data-filter="{key}" data-value="{v}" aria-pressed="false">{label} {v}</button>' for v in values)
+        return f'<div class="filter-group" role="group" aria-label="Filter by {label.lower()}"><span class="filter-label">{label}</span>{btns}</div>'
+    return (f'<div class="filters" data-filters>{group("Court", "court", [1, 2])}{group("Round", "round", [1, 2, 3, 4])}'
+            f'<p class="filter-count" aria-live="polite">Showing all {len(MATCHES)} matches</p></div>')
 
 
 def committees_block():
@@ -306,6 +382,7 @@ TOKENS = {
     "committees": committees_block, "members": members_table, "gallery": gallery_block,
     "videos": videos_block, "appendix_scans": appendix_scans,
     "n_cap": lambda: str(sum(hit_time_cap(m) for m in MATCHES)),
+    "explorer": explorer, "filters": match_filters,
     "toc": lambda: '<ul class="toc">' + "".join(
         f'<li><a href="{p["file"]}"><span class="nav-num">{p["num"]:02d}</span><span>{esc(p["name"])}</span></a></li>'
         for p in SITE["pages"][1:]) + "</ul>",

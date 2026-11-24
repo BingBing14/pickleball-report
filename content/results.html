@@ -1,11 +1,13 @@
 lead: {{final_summary}}
 <section class="section">
   <div class="wrap">
+    {{explorer}}
+
     <h2>Final placings</h2>
     {{placings}}
 
-    <h2>Medal round</h2>
-    {{scoreboards_medal}}
+    <h2>Bracket</h2>
+    {{bracket}}
 
     <h2>Pool standings</h2>
     <p class="prose">Ranked by wins, then head-to-head, then point differential. Pool matches only.</p>
@@ -14,8 +16,9 @@ lead: {{final_summary}}
       <div>{{standings_B}}</div>
     </div>
 
-    <h2>Pool matches</h2>
+    <h2>All matches</h2>
     <p class="prose">{{n_cap}} of the 8 matches ended at the 6-minute cap, before either team reached 7 points. In those matches the team ahead when time ran out won.</p>
-    {{scoreboards_pool}}
+    {{filters}}
+    {{scoreboards}}
   </div>
 </section>
