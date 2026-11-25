@@ -1,6 +1,216 @@
 {
   "_note": "Add photos here after they are optimized into assets/photos/. Each group is one moment of the day. Videos use the Drive file ID and are embedded with /preview.",
-  "groups": [],
+  "groups": [
+    {
+      "title": "Before the start (about 1:13–1:18 PM)",
+      "photos": [
+        {
+          "file": "p5854.jpg",
+          "caption": "Students gathered at the side of the courts before the opening, 1:13 PM",
+          "alt": "A group of students in white UST shirts sitting together at the courtside, some holding papers",
+          "w": 1600,
+          "h": 1200
+        },
+        {
+          "file": "p0194.jpg",
+          "caption": "Writing on papers at the courtside before play, 1:17 PM",
+          "alt": "Students sitting on the floor at the courtside writing on papers",
+          "w": 1200,
+          "h": 1600
+        },
+        {
+          "file": "p0209.jpg",
+          "caption": "Getting papers ready at the side of the courts, 1:17 PM",
+          "alt": "Students seated at the courtside, one writing on a paper",
+          "w": 1600,
+          "h": 1200
+        },
+        {
+          "file": "p0210.jpg",
+          "caption": "The courts at the QPav practice gym just before play, 1:18 PM",
+          "alt": "Wide view of the blue and red courts in the practice gym with students walking onto them",
+          "w": 1600,
+          "h": 1200
+        }
+      ]
+    },
+    {
+      "title": "Pool play, early rounds (about 1:20–1:30 PM)",
+      "photos": [
+        {
+          "file": "p0211.jpg",
+          "caption": "Players and officials on court, 1:20 PM",
+          "alt": "Students standing on the red and blue courts during the early rounds",
+          "w": 1600,
+          "h": 1200
+        },
+        {
+          "file": "p5856.jpg",
+          "caption": "On court during an early-round match, 1:21 PM",
+          "alt": "Three students standing on a red court near the net",
+          "w": 1600,
+          "h": 1200
+        },
+        {
+          "file": "p5857.jpg",
+          "caption": "A doubles match in progress, 1:22 PM",
+          "alt": "Players spread across a red court with spectators along the far side of the gym",
+          "w": 1600,
+          "h": 1200
+        },
+        {
+          "file": "p0212.jpg",
+          "caption": "Both courts in use, 1:22 PM",
+          "alt": "Wide view of the gym with matches on the courts and students watching from the side",
+          "w": 1600,
+          "h": 1200
+        },
+        {
+          "file": "p5858.jpg",
+          "caption": "Watching from beside the court, 1:23 PM",
+          "alt": "A smiling student in a white shirt standing beside the net of a red court",
+          "w": 1600,
+          "h": 1200
+        },
+        {
+          "file": "p0214.jpg",
+          "caption": "A match on the blue court, 1:25 PM",
+          "alt": "Players on the blue court in front of the University of Santo Tomas banner",
+          "w": 1600,
+          "h": 1200
+        },
+        {
+          "file": "p0215.jpg",
+          "caption": "Following the play from the sideline, 1:25 PM",
+          "alt": "A student watching from the sideline as players rally on the red court",
+          "w": 1600,
+          "h": 1200
+        },
+        {
+          "file": "p5860.jpg",
+          "caption": "At the net post during a match, 1:25 PM",
+          "alt": "A student standing by the net post at the side of the red court",
+          "w": 1600,
+          "h": 1200
+        },
+        {
+          "file": "p5861.jpg",
+          "caption": "Between matches on court, 1:29 PM",
+          "alt": "Several students standing and talking on the courts between matches",
+          "w": 1600,
+          "h": 1200
+        },
+        {
+          "file": "p5862.jpg",
+          "caption": "Changeover between rounds, 1:29 PM",
+          "alt": "Students moving across the court during a changeover",
+          "w": 1600,
+          "h": 1200
+        }
+      ]
+    },
+    {
+      "title": "Pool play, later rounds (about 1:36–1:43 PM)",
+      "photos": [
+        {
+          "file": "p5863.jpg",
+          "caption": "Ready to play, paddle in hand, 1:36 PM",
+          "alt": "Two students standing near the net, one holding a pickleball paddle",
+          "w": 1600,
+          "h": 1200
+        },
+        {
+          "file": "p5864.jpg",
+          "caption": "A rally on the red court, 1:36 PM",
+          "alt": "Players in position on both sides of the net on the red court",
+          "w": 1600,
+          "h": 1200
+        },
+        {
+          "file": "p5865.jpg",
+          "caption": "The courtside table area, 1:38 PM",
+          "alt": "A student seated on a chair beside the court near tables and equipment",
+          "w": 1600,
+          "h": 1200
+        },
+        {
+          "file": "p5866.jpg",
+          "caption": "A match on the blue court, 1:39 PM",
+          "alt": "Players on the blue court with the gym bleachers behind them",
+          "w": 1600,
+          "h": 1200
+        },
+        {
+          "file": "p5867.jpg",
+          "caption": "Play on the red court, 1:40 PM",
+          "alt": "Players on either side of the net on the red court",
+          "w": 1600,
+          "h": 1200
+        },
+        {
+          "file": "p5868.jpg",
+          "caption": "Pointing out a call from the sideline, 1:41 PM",
+          "alt": "A student at the sideline pointing toward the court during play",
+          "w": 1600,
+          "h": 1200
+        },
+        {
+          "file": "p5870.jpg",
+          "caption": "Wide view of a match on the blue court, 1:41 PM",
+          "alt": "Wide view of players on the blue court under the gym roof",
+          "w": 1600,
+          "h": 1200
+        },
+        {
+          "file": "p5872.jpg",
+          "caption": "Looking down the red court, 1:41 PM",
+          "alt": "View along the red court past the net toward the far end of the gym",
+          "w": 1600,
+          "h": 1200
+        },
+        {
+          "file": "p5873.jpg",
+          "caption": "Writing on a sheet at the courtside, 1:42 PM",
+          "alt": "Two students at a yellow pillar, one writing on a sheet of paper",
+          "w": 1600,
+          "h": 1200
+        }
+      ]
+    },
+    {
+      "title": "Last matches (about 1:47–1:49 PM)",
+      "photos": [
+        {
+          "file": "p0222.jpg",
+          "caption": "Play near the end of our block, 1:47 PM",
+          "alt": "Players on the blue court near the end of the tournament",
+          "w": 1600,
+          "h": 1200
+        },
+        {
+          "file": "p5874.jpg",
+          "caption": "Near the end of play, 1:47 PM",
+          "alt": "A student standing beside the court as players compete on the blue court",
+          "w": 1600,
+          "h": 1200
+        },
+        {
+          "file": "p5875.jpg",
+          "caption": "Directing play on the red court, 1:49 PM",
+          "alt": "A student on the red court gesturing with one arm during a match",
+          "w": 1600,
+          "h": 1200
+        },
+        {
+          "file": "p5877.jpg",
+          "caption": "One of the last matches of the day, 1:49 PM",
+          "alt": "Players at both ends of the red court during a match",
+          "w": 1600,
+          "h": 1200
+        }
+      ]
+    }
+  ],
   "videos": [],
   "appendix_scans": []
 }

@@ -326,6 +326,13 @@ tbody th { font-weight: 600; }
 .callout p:last-child, .callout ul:last-child { margin-bottom: 0; }
 .notice { border: 1px dashed var(--line); border-radius: var(--r2); padding: var(--s5); color: var(--ink-2); background: var(--surface); }
 
+/* Photos inside pages */
+.photo { margin: 0; }
+.photo img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; border-radius: var(--r2); background: var(--surface); }
+.photo-pair { display: grid; gap: var(--s4); margin: var(--s5) 0; }
+@media (min-width: 700px) { .photo-pair { grid-template-columns: 1fr 1fr; } }
+.photo-stack { display: grid; gap: var(--s4); margin-top: var(--s5); }
+
 /* Gallery */
 .g-group h2 { margin-top: var(--s7); }
 .g-grid { display: grid; gap: var(--s4); grid-template-columns: 1fr; }

@@ -360,6 +360,15 @@ def appendix_scans():
         f'<figcaption>{esc(p["caption"])}</figcaption></figure>' for p in GAL["appendix_scans"]) + "</div>"
 
 
+def photo_figure(fname, cls="photo"):
+    p = next((x for g in GAL["groups"] for x in g["photos"] if x["file"] == fname), None)
+    if not p:
+        sys.exit(f"Photo {fname} is not listed in data/gallery.json")
+    return (f'<figure class="{cls}"><a href="assets/photos/{esc(p["file"])}" class="g-link" data-caption="{esc(p["caption"])}">'
+            f'<img src="assets/photos/{esc(p["file"])}" alt="{esc(p["alt"])}" loading="lazy" width="{p["w"]}" height="{p["h"]}"></a>'
+            f'<figcaption>{esc(p["caption"])}</figcaption></figure>')
+
+
 def facts():
     n_cap = sum(hit_time_cap(m) for m in MATCHES)
     items = [
@@ -395,12 +404,14 @@ TOKENS = {
 def fill(text):
     def rep(mo):
         key = mo.group(1)
+        if key.startswith("photo:"):
+            return photo_figure(key[6:])
         if key.startswith("site."):
             return esc(str(SITE[key[5:]]))
         if key not in TOKENS:
             sys.exit(f"Unknown token {{{{{key}}}}}")
         return TOKENS[key]()
-    return re.sub(r"\{\{\s*([\w.]+)\s*\}\}", rep, text)
+    return re.sub(r"\{\{\s*([\w.:]+)\s*\}\}", rep, text)
 
 
 # ---------- page template ----------
