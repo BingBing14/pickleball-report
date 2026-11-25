@@ -224,6 +224,104 @@
     });
   }
 
+
+  /* ---------- Interactive court (Rules page) ---------- */
+  var court = document.querySelector('[data-court]');
+  if (court) (function () {
+    var D = JSON.parse(document.getElementById('court-data').textContent);
+    var svg = court.querySelector('.cx-svg'), NS = 'http://www.w3.org/2000/svg';
+    var title = court.querySelector('.cx-title'), text = court.querySelector('.cx-text'), note = court.querySelector('.cx-class'), kicker = court.querySelector('.cx-kicker');
+    var ball = svg.querySelector('.cx-ball'), trail = svg.querySelector('.cx-trail'), marks = svg.querySelector('.cx-marks'),
+        players = svg.querySelector('.cx-players'), fault = svg.querySelector('.cx-fault');
+    var running = null;
+
+    function highlight(zone) {
+      $all('[data-zone]', court).forEach(function (el) {
+        var on = el.dataset.zone === zone;
+        if (el.tagName === 'BUTTON') el.setAttribute('aria-pressed', String(on)); else el.classList.toggle('on', on);
+      });
+    }
+    function show(zone) {
+      stopDemo(true);
+      var z = D.zones[zone]; if (!z) return;
+      highlight(zone);
+      kicker.textContent = 'Court guide';
+      title.textContent = z.t; text.textContent = z.p;
+      note.hidden = !z.c; note.textContent = z.c ? 'At our tournament: ' + z.c.replace(/^At our tournament /, '') : '';
+    }
+    court.addEventListener('click', function (e) {
+      var z = e.target.closest('[data-zone]');
+      if (z) show(z.dataset.zone);
+      var d = e.target.closest('[data-demo]');
+      if (d) { if (d.getAttribute('aria-pressed') === 'true') stopDemo(); else playDemo(d.dataset.demo); }
+    });
+    court.addEventListener('keydown', function (e) {
+      var z = e.target.closest('g[data-zone]');
+      if (z && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); show(z.dataset.zone); }
+    });
+
+    function el(tag, attrs, parent) {
+      var n = document.createElementNS(NS, tag);
+      for (var k in attrs) n.setAttribute(k, attrs[k]);
+      parent.appendChild(n); return n;
+    }
+    function clearDemo() {
+      marks.innerHTML = ''; players.innerHTML = ''; trail.setAttribute('points', '');
+      ball.setAttribute('cx', -20); ball.setAttribute('cy', -20); fault.classList.remove('show');
+    }
+    function stopDemo(keepPanel) {
+      if (running) { running.cancelled = true; running = null; }
+      $all('[data-demo]', court).forEach(function (b) { b.setAttribute('aria-pressed', 'false'); });
+      clearDemo();
+      if (!keepPanel) { highlight(''); title.textContent = 'Tap a part of the court'; text.textContent = 'Select an area on the court or a button below it, or watch a demo.'; note.hidden = true; kicker.textContent = 'Court guide'; }
+    }
+    function playDemo(name) {
+      stopDemo(true);
+      var d = D.demos[name], run = { cancelled: false }; running = run;
+      $all('[data-demo]', court).forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.demo === name)); });
+      highlight(d.zone || ''); note.hidden = true;
+      kicker.textContent = 'Demo'; title.textContent = d.t.replace(/^Demo: /, '');
+      d.players.forEach(function (p) {
+        var g = el('g', { 'class': 'cx-player', transform: 'translate(' + p[0] + ' ' + p[1] + ')' }, players);
+        el('circle', { r: 9 }, g); var t = el('text', {}, g); t.textContent = p[2];
+      });
+      var pts = [], i = 0, cur = d.steps[0].to.slice(), n = 0;
+      function place(x, y) { ball.setAttribute('cx', x); ball.setAttribute('cy', y); }
+      function next() {
+        if (run.cancelled) return;
+        if (i >= d.steps.length) {
+          setTimeout(function () { if (!run.cancelled) { $all('[data-demo]', court).forEach(function (b) { b.setAttribute('aria-pressed', 'false'); }); running = null; } }, 400);
+          return;
+        }
+        var s = d.steps[i++], from = cur.slice(), to = s.to;
+        text.textContent = s.p;
+        var done = function () {
+          cur = to.slice(); pts.push(to.join(',')); trail.setAttribute('points', pts.join(' '));
+          if (s.bounce || s.volley) {
+            n++;
+            el('circle', { 'class': 'cx-mark', cx: to[0], cy: to[1], r: s.volley ? 12 : 9 }, marks);
+            var lt = el('text', { 'class': 'cx-marknum', x: to[0], y: to[1] - 16 }, marks);
+            lt.textContent = s.volley ? 'volley' : 'bounce ' + n;
+          }
+          if (s.fault) { fault.setAttribute('transform', 'translate(' + (to[0] + 18) + ' ' + (to[1] - 18) + ')'); fault.classList.add('show'); }
+          setTimeout(next, reduce ? 1800 : 1500);
+        };
+        if (i === 1) { place(to[0], to[1]); pts.push(to.join(',')); trail.setAttribute('points', pts.join(' ')); setTimeout(next, reduce ? 1800 : 1300); return; }
+        if (reduce) { place(to[0], to[1]); done(); return; }
+        var t0 = null, dur = 900;
+        (function frame(t) {
+          if (run.cancelled) return;
+          if (!t0) t0 = t;
+          var k = Math.min((t - t0) / dur, 1), e = k < .5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2;
+          var lift = Math.sin(Math.PI * k) * 26; // a little arc so the ball looks like it travels through the air
+          place(from[0] + (to[0] - from[0]) * e, from[1] + (to[1] - from[1]) * e - lift);
+          if (k < 1) requestAnimationFrame(frame); else done();
+        })(performance.now());
+      }
+      next();
+    }
+  })();
+
   /* ---------- Lightbox ---------- */
   var links = $all('.g-link');
   if (!links.length) return;

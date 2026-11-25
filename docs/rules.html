@@ -37,38 +37,102 @@
       <p>Everything else followed the normal rules. Games were still win-by-2: at 6–6, play would have gone on until one team led by 2 (deuce), but no game reached that point. Changeovers between rounds took about 1–2 minutes.</p>
     </div>
 
-    <div class="cols">
-      <div>
-        <h2>The court</h2>
-        <div class="prose">
-          <ul>
-            <li>The court is <strong>20 feet wide and 44 feet long</strong>, for both singles and doubles.</li>
-            <li>The <strong>non-volley zone</strong> ("the kitchen") is the area within <strong>7 feet</strong> of the net on each side. Its lines count as part of the kitchen.</li>
-            <li>We played on 2 courts with the nets already set up at the venue.</li>
-          </ul>
+    <section class="court-x" data-court aria-labelledby="court-h">
+      <h2 id="court-h">The court</h2>
+      <p class="prose">The court is <strong>20 feet wide and 44 feet long</strong>. Tap any part of the court below to see its rule, or play one of the demos.</p>
+      <div class="cx-grid">
+        <div class="cx-stage">
+          <svg class="cx-svg" viewBox="0 0 480 250" role="group" aria-label="Interactive pickleball court, 44 by 20 feet">
+            <defs>
+              <pattern id="cx-hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="8" height="8" fill="#C9E5D7"/><path d="M0 0v8" stroke="#B3D9C5" stroke-width="3"/></pattern>
+            </defs>
+            <text x="130" y="14" class="cx-label">Serving side</text>
+            <text x="350" y="14" class="cx-label">Receiving side</text>
+            <g class="cx-zone" data-zone="service" tabindex="0" role="button" aria-label="Service courts">
+              <rect x="20" y="20" width="150" height="100"/><rect x="20" y="120" width="150" height="100"/>
+              <rect x="310" y="20" width="150" height="100"/><rect x="310" y="120" width="150" height="100"/>
+            </g>
+            <g class="cx-zone cx-kitchen" data-zone="kitchen" tabindex="0" role="button" aria-label="Kitchen (non-volley zone)">
+              <rect x="170" y="20" width="70" height="200"/><rect x="240" y="20" width="70" height="200"/>
+              <text x="205" y="125" class="cx-ztext">KITCHEN</text><text x="275" y="125" class="cx-ztext">KITCHEN</text>
+            </g>
+            <g class="cx-line" data-zone="kline" tabindex="0" role="button" aria-label="Kitchen line">
+              <path class="hit" d="M170 20V220M310 20V220"/><path class="vis" d="M170 20V220M310 20V220"/>
+            </g>
+            <g class="cx-line" data-zone="center" tabindex="0" role="button" aria-label="Centre line">
+              <path class="hit" d="M20 120H170M310 120H460"/><path class="vis" d="M20 120H170M310 120H460"/>
+            </g>
+            <g class="cx-line" data-zone="sideline" tabindex="0" role="button" aria-label="Sidelines">
+              <path class="hit" d="M20 20H460M20 220H460"/><path class="vis" d="M20 20H460M20 220H460"/>
+            </g>
+            <g class="cx-line" data-zone="baseline" tabindex="0" role="button" aria-label="Baselines">
+              <path class="hit" d="M20 20V220M460 20V220"/><path class="vis" d="M20 20V220M460 20V220"/>
+            </g>
+            <g class="cx-line cx-net" data-zone="net" tabindex="0" role="button" aria-label="Net">
+              <path class="hit" d="M240 8V232"/><path class="vis" d="M240 8V232"/>
+              <circle cx="240" cy="10" r="4"/><circle cx="240" cy="230" r="4"/>
+            </g>
+            <text x="95" y="246" class="cx-dim">44 ft long</text>
+            <text x="9" y="124" class="cx-dim" transform="rotate(-90 9 120)">20 ft</text>
+            <text x="205" y="246" class="cx-dim">7 ft</text><text x="275" y="246" class="cx-dim">7 ft</text>
+            <g class="cx-demo" aria-hidden="true">
+              <polyline class="cx-trail" points=""/>
+              <g class="cx-marks"></g>
+              <g class="cx-players"></g>
+              <circle class="cx-ball" r="6" cx="-20" cy="-20"/>
+              <g class="cx-fault" transform="translate(-50 -50)"><circle r="14"/><path d="M-6-6l12 12M6-6l-12 12"/></g>
+            </g>
+          </svg>
         </div>
+        <aside class="cx-panel" aria-live="polite">
+          <p class="label cx-kicker">Court guide</p>
+          <h3 class="cx-title">Tap a part of the court</h3>
+          <p class="cx-text">Each area of the court has its own rules. Select an area on the court or a button below it, or watch a demo.</p>
+          <p class="cx-class" hidden></p>
+          <div class="cx-demos">
+            <p class="label">Demos</p>
+            <button type="button" class="btn btn-ghost cx-play" data-demo="serve">The serve</button>
+            <button type="button" class="btn btn-ghost cx-play" data-demo="bounce">Two-bounce rule</button>
+            <button type="button" class="btn btn-ghost cx-play" data-demo="fault">Kitchen fault</button>
+          </div>
+        </aside>
+        <div class="cx-chips" role="group" aria-label="Parts of the court">
+            <button type="button" class="pick sm" data-zone="kitchen">Kitchen</button>
+            <button type="button" class="pick sm" data-zone="kline">Kitchen line</button>
+            <button type="button" class="pick sm" data-zone="service">Service courts</button>
+            <button type="button" class="pick sm" data-zone="center">Centre line</button>
+            <button type="button" class="pick sm" data-zone="baseline">Baselines</button>
+            <button type="button" class="pick sm" data-zone="sideline">Sidelines</button>
+            <button type="button" class="pick sm" data-zone="net">Net</button>
+          </div>
       </div>
-      <figure class="court" style="margin:0">
-        <svg viewBox="0 0 300 160" role="img" aria-labelledby="court-t">
-          <title id="court-t">Pickleball court diagram, 44 by 20 feet, with a 7-foot non-volley zone on each side of the net</title>
-          <rect x="20" y="20" width="260" height="118" fill="#F3F4F1" stroke="#14171A" stroke-width="2"/>
-          <rect x="108.6" y="20" width="41.4" height="118" fill="#E3F1EA" stroke="#14171A" stroke-width="1.5"/>
-          <rect x="150" y="20" width="41.4" height="118" fill="#E3F1EA" stroke="#14171A" stroke-width="1.5"/>
-          <line x1="20" y1="79" x2="108.6" y2="79" stroke="#14171A" stroke-width="1.5"/>
-          <line x1="191.4" y1="79" x2="280" y2="79" stroke="#14171A" stroke-width="1.5"/>
-          <line x1="150" y1="12" x2="150" y2="146" stroke="#0B6B4B" stroke-width="3"/>
-          <text x="150" y="9" font-size="9" text-anchor="middle" fill="#0B6B4B" font-family="Barlow, sans-serif" font-weight="600">NET</text>
-          <text x="150" y="157" font-size="9" text-anchor="middle" fill="#14171A" font-family="Barlow, sans-serif">Kitchen: 7 ft each side</text>
-          <text x="64" y="54" font-size="9" text-anchor="middle" fill="#4A5058" font-family="Barlow, sans-serif">Service court</text>
-          <text x="64" y="112" font-size="9" text-anchor="middle" fill="#4A5058" font-family="Barlow, sans-serif">Service court</text>
-          <text x="236" y="54" font-size="9" text-anchor="middle" fill="#4A5058" font-family="Barlow, sans-serif">Service court</text>
-          <text x="236" y="112" font-size="9" text-anchor="middle" fill="#4A5058" font-family="Barlow, sans-serif">Service court</text>
-          <text x="10" y="82" font-size="9" text-anchor="middle" fill="#14171A" font-family="Barlow, sans-serif" transform="rotate(-90 10 82)">20 ft</text>
-          <text x="85" y="16" font-size="9" text-anchor="middle" fill="#14171A" font-family="Barlow, sans-serif">44 ft long</text>
-        </svg>
-        <figcaption>Court layout (not to exact scale). The shaded strips are the kitchen.</figcaption>
-      </figure>
-    </div>
+      <script type="application/json" id="court-data">
+      {
+        "zones": {
+          "kitchen": {"t": "Kitchen (non-volley zone)", "p": "The area within 7 feet of the net on each side. You may not volley (hit the ball before it bounces) while standing in the kitchen, and you may not step into it after a volley because of your momentum. You may enter it at any time to play a ball that has bounced."},
+          "kline": {"t": "Kitchen line", "p": "The kitchen line counts as part of the kitchen. Touching it while you volley is a fault, and a serve that lands on it is short, which is also a fault."},
+          "service": {"t": "Service courts", "p": "The serve must land in the service court diagonally opposite the server, past the kitchen. Each new service turn starts from the right-hand court, and after each point won the server switches sides with their partner."},
+          "center": {"t": "Centre line", "p": "The centre line splits each side into a left and a right service court. A serve that lands on the centre line of the correct service court is in."},
+          "baseline": {"t": "Baselines", "p": "The back lines of the court. When serving, at least one foot must be behind the baseline, and neither foot may touch the baseline or the court when the ball is hit. A ball that lands on a baseline is in.", "c": "We did not change the serving rules for our tournament."},
+          "sideline": {"t": "Sidelines", "p": "The long lines on each side. The court is the same width, 20 feet, for singles and doubles. A ball that lands on a sideline is in."},
+          "net": {"t": "Net", "p": "The net divides the court. Touching the net or the net post with your body, paddle or clothing while the ball is in play is a fault. A serve that touches the net and still lands in the correct service court is played.", "c": "At our tournament the two nets belonged to UST and were already set up at the QPav practice gym."}
+        },
+        "demos": {
+          "serve": {"t": "The serve", "zone": "kitchen", "players": [[8, 175, "S"], [400, 60, "R"]], "steps": [
+            {"to": [8, 175], "p": "The server stands behind the baseline, starting from the right-hand service court."},
+            {"to": [395, 70], "bounce": true, "p": "The underhand serve goes diagonally, clears the whole kitchen and its line, and lands in the opposite service court."}]},
+          "bounce": {"t": "The two-bounce rule", "players": [[8, 175, "S"], [430, 70, "R"], [140, 150, "S"], [360, 150, "R"]], "steps": [
+            {"to": [8, 175], "p": "The serve is hit from behind the baseline."},
+            {"to": [395, 70], "bounce": true, "p": "Bounce 1: the receiving team must let the serve bounce before returning it."},
+            {"to": [110, 160], "bounce": true, "p": "Bounce 2: the serving team must let the return bounce too."},
+            {"to": [330, 140], "volley": true, "p": "After both bounces, either team may volley (hit the ball before it bounces), as long as they are not in the kitchen."}]},
+          "fault": {"t": "A kitchen fault", "zone": "kitchen", "players": [[100, 90, "A"], [285, 110, "B"]], "steps": [
+            {"to": [100, 90], "p": "Player A hits the ball toward Player B, who is standing inside the kitchen."},
+            {"to": [278, 108], "fault": true, "p": "Player B volleys it out of the air while standing in the kitchen. That is a fault, and the rally ends."}]}
+        }
+      }
+      </script>
+    </section>
 
     <div class="cols">
       <div class="prose">

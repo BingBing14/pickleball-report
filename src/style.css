@@ -385,3 +385,48 @@ tbody th { font-weight: 600; }
   .site-header, .prevnext, .totop, .site-footer { display: none; }
   .scoreboard, .champion, .place-1 { background: #fff; color: #000; border: 1px solid #000; }
 }
+
+/* Interactive court (Rules page) */
+.court-x { margin-bottom: var(--s7); }
+.cx-grid { display: grid; gap: var(--s5); margin-top: var(--s4); }
+@media (min-width: 960px) {
+  .cx-grid { grid-template-columns: 1.7fr 1fr; align-items: start; row-gap: var(--s3); }
+  .cx-stage { grid-column: 1; grid-row: 1; } .cx-panel { grid-column: 2; grid-row: 1 / span 2; } .cx-chips { grid-column: 1; grid-row: 2; margin-top: 0; }
+}
+.cx-grid > * { min-width: 0; }
+.cx-svg { width: 100%; height: auto; display: block; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r2); touch-action: manipulation; }
+.cx-label { font: 600 11px var(--body); fill: var(--ink-2); text-anchor: middle; letter-spacing: .06em; text-transform: uppercase; }
+.cx-dim { font: 500 11px var(--body); fill: var(--ink-2); text-anchor: middle; }
+.cx-ztext { font: 700 12px var(--display); fill: #4A6B5B; text-anchor: middle; letter-spacing: .1em; pointer-events: none; }
+.cx-zone rect { fill: var(--accent-soft); stroke: none; transition: fill .2s; }
+.cx-kitchen rect { fill: url(#cx-hatch); }
+.cx-zone, .cx-line { cursor: pointer; outline: none; }
+.cx-zone:hover rect { fill: #D2EADD; }
+.cx-kitchen:hover rect { fill: #BFE0CE; }
+.cx-zone.on rect { fill: #9FD3B8; }
+.cx-line .vis { stroke: var(--ink); stroke-width: 2.5; fill: none; transition: stroke .2s, stroke-width .2s; }
+.cx-line .hit { stroke: transparent; stroke-width: 18; fill: none; }
+.cx-line:hover .vis { stroke: var(--accent); }
+.cx-line.on .vis { stroke: var(--accent); stroke-width: 6; }
+.cx-net .vis { stroke: var(--ink); stroke-width: 4; stroke-dasharray: 2 3; }
+.cx-net circle { fill: var(--ink); }
+.cx-net.on .vis { stroke: var(--accent); stroke-dasharray: none; }
+.cx-zone:focus-visible rect, .cx-line:focus-visible .vis { stroke: var(--accent); stroke-width: 4; }
+.cx-chips { display: flex; flex-wrap: wrap; gap: var(--s2); }
+.cx-panel { border: 1px solid var(--line); border-radius: var(--r2); padding: var(--s5); background: var(--paper); }
+.cx-title { margin-bottom: var(--s2); }
+.cx-text { margin-bottom: var(--s4); }
+.cx-class { background: var(--accent-soft); color: var(--accent); border-radius: var(--r1); padding: var(--s2) var(--s3); font-weight: 500; font-size: 15px; }
+.cx-demos { border-top: 1px solid var(--line); padding-top: var(--s4); display: flex; flex-wrap: wrap; gap: var(--s2); }
+.cx-demos .label { width: 100%; margin: 0; }
+.cx-play[aria-pressed="true"] { background: var(--ink); color: var(--on-ink); }
+.cx-ball { fill: #F2C230; stroke: var(--ink); stroke-width: 2; }
+.cx-trail { fill: none; stroke: var(--ink); stroke-width: 2; stroke-dasharray: 5 5; opacity: .55; }
+.cx-mark { fill: none; stroke: var(--accent); stroke-width: 2.5; }
+.cx-marknum { font: 700 12px var(--display); fill: var(--accent); text-anchor: middle; }
+.cx-player circle { fill: var(--ink); }
+.cx-player text { font: 700 11px var(--display); fill: #fff; text-anchor: middle; dominant-baseline: central; }
+.cx-fault circle { fill: #C62828; }
+.cx-fault path { stroke: #fff; stroke-width: 3; stroke-linecap: round; }
+.cx-fault { opacity: 0; transition: opacity .2s; }
+.cx-fault.show { opacity: 1; }
