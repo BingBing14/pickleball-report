@@ -58,7 +58,9 @@ p, ul, ol { margin: 0 0 var(--s4); }
 .header-bar { display: flex; align-items: center; justify-content: space-between; gap: var(--s4); min-height: 64px; }
 .mark { display: flex; align-items: center; gap: var(--s3); color: var(--ink); text-decoration: none; line-height: 1.15; }
 .mark strong { font-family: var(--display); font-size: 22px; letter-spacing: .01em; display: block; }
-.mark-sub { display: block; font-size: 13px; color: var(--ink-2); }
+.mark-sub { display: block; font-size: 13px; color: var(--ink-2); white-space: nowrap; }
+@media (max-width: 400px) { .menu-btn { padding: 0 var(--s3); } .header-bar { gap: var(--s2); } }
+@media (max-width: 359px) { .menu-btn { width: 44px; padding: 0; justify-content: center; } .menu-btn span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); } }
 .mark-logo { width: 40px; height: 40px; flex: none; }
 .menu-btn { display: inline-flex; align-items: center; gap: var(--s2); min-height: 44px; padding: 0 var(--s4); border: 1px solid var(--ink); background: var(--paper);
   color: var(--ink); border-radius: var(--r1); font: 600 16px/1 var(--body); cursor: pointer; }
