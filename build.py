@@ -354,9 +354,9 @@ def videos_block():
 def appendix_scans():
     if not GAL["appendix_scans"]:
         return '<p class="notice">Photos of the handwritten score sheets and standings sheet are being added here.</p>'
-    return '<div class="g-grid">' + "".join(
-        f'<figure class="g-item"><a href="assets/photos/{esc(p["file"])}" class="g-link" data-caption="{esc(p["caption"])}">'
-        f'<img src="assets/photos/{esc(p["file"])}" alt="{esc(p["alt"])}" loading="lazy"></a>'
+    return '<div class="g-grid scans">' + "".join(
+        f'<figure class="g-item scan"><a href="assets/photos/{esc(p["file"])}" class="g-link" data-caption="{esc(p["caption"])}">'
+        f'<img src="assets/photos/{esc(p["file"])}" alt="{esc(p["alt"])}" loading="lazy" width="{p["w"]}" height="{p["h"]}" style="aspect-ratio:{p["w"]}/{p["h"]}"></a>'
         f'<figcaption>{esc(p["caption"])}</figcaption></figure>' for p in GAL["appendix_scans"]) + "</div>"
 
 

@@ -212,5 +212,27 @@
     }
   ],
   "videos": [],
-  "appendix_scans": []
+  "appendix_scans": [
+    {
+      "file": "sheet-teams.jpg",
+      "caption": "Sheet 1: team list and bracket, as printed for the officials",
+      "alt": "Printed sheet titled Pickleball Tournament Sheets: Group 2 Teams, Bracket and Score Sheet, with the six teams in two pools and the bracket diagram",
+      "w": 844,
+      "h": 1125
+    },
+    {
+      "file": "sheet-schedule.jpg",
+      "caption": "Sheet 2: match schedule and score sheet with handwritten scores, and Pool A standings",
+      "alt": "Printed match schedule for matches M1 to M8 with handwritten scores and winners, and a handwritten Pool A standings table",
+      "w": 1125,
+      "h": 1500
+    },
+    {
+      "file": "sheet-standings.jpg",
+      "caption": "Sheet 3: Pool B standings and final placings, filled in by hand",
+      "alt": "Printed Pool B standings table and final placings table, filled in by hand with A2 first, B3 second, A1 third, B2 fourth, A3 fifth and B1 sixth",
+      "w": 844,
+      "h": 1125
+    }
+  ]
 }

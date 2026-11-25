@@ -14,5 +14,4 @@ or the page text in `content/*.html`, then run `python3 build.py`.
 
 ## Still needed
 
-- **Photos of the handwritten score sheets and standings sheet** (Appendix E).
 - **Group 1 as players:** teams, results and placings in Group 2's bracket (optional extra section).
