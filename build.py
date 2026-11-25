@@ -463,7 +463,7 @@ def render(page, body, lead):
 <a class="skip" href="#main">Skip to content</a>
 <header class="site-header" id="top">
   <div class="wrap header-bar">
-    <a class="mark" href="index.html"><span class="mark-ball" aria-hidden="true"></span><span><strong>{esc(SITE['short_title'])}</strong><span class="mark-sub">Tournament Report · {esc(SITE['section'])}</span></span></a>
+    <a class="mark" href="index.html"><img class="mark-logo" src="assets/icon.svg" alt="" width="40" height="40"><span><strong>{esc(SITE['short_title'])}</strong><span class="mark-sub">Tournament Report · {esc(SITE['section'])}</span></span></a>
     <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu">{ICON_MENU}<span>Sections</span></button>
   </div>
   <nav class="wrap nav-desktop" aria-label="Report sections">{nav_links(page['file'], 'nav-row')}</nav>

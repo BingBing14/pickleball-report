@@ -56,5 +56,6 @@ connected). It follows the brief's constraints and the rules below.
 ## Imagery and icons
 
 - Photos are large, 8px radius, 3:2 crop in grids, always captioned, `alt` on every image, lazy-loaded.
+- Logo: a tilted pickleball paddle (ink face, green edge guard, wrapped green grip) with an upright white "1", hitting a perforated ball. Source `src/logos/logo.svg`; it is also the browser-tab icon. Use it on light backgrounds only.
 - No icon font. A few inline SVGs (menu, arrows, close) drawn at 2px stroke.
 - Motion: only short fades on the menu and lightbox, turned off under `prefers-reduced-motion`.

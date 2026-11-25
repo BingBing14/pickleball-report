@@ -14,7 +14,5 @@ or the page text in `content/*.html`, then run `python3 build.py`.
 
 ## Still needed
 
-- **Videos:** the Drive folder had 31 photos and no videos. Add videos to the folder (shared as "Anyone with the link") and they can be embedded.
-- **More photos** (for example the opening, the Final, a group photo) if the group has them.
 - **Photos of the handwritten score sheets and standings sheet** (Appendix E).
 - **Group 1 as players:** teams, results and placings in Group 2's bracket (optional extra section).
