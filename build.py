@@ -68,7 +68,7 @@ def standings(pool):
         return None
 
     order = sorted(rows.values(), key=lambda r: (-r["w"], -r["diff"], r["pa"]))
-    # Head-to-head only decides a two-way tie on wins (the brief's order: wins, H2H, diff, PA, coin flip).
+    # Head-to-head only decides a two-way tie on wins (ranking order: wins, H2H, diff, PA, rock-paper-scissors).
     for i in range(len(order) - 1):
         same = [r for r in order if r["w"] == order[i]["w"]]
         if len(same) == 2 and order[i] in same and order[i + 1] in same:
@@ -79,7 +79,7 @@ def standings(pool):
         r["rank"] = i + 1
         nxt = order[i + 1] if i + 1 < len(order) else None
         if nxt and (r["w"], r["diff"], r["pa"]) == (nxt["w"], nxt["diff"], nxt["pa"]) and not h2h(r["team"], nxt["team"]):
-            sys.exit(f"Pool {pool}: {r['team']} and {nxt['team']} are fully tied; a coin flip result must be recorded")
+            sys.exit(f"Pool {pool}: {r['team']} and {nxt['team']} are fully tied; the rock-paper-scissors result must be recorded")
     return order
 
 
