@@ -372,7 +372,7 @@ def photo_figure(fname, cls="photo"):
 def facts():
     n_cap = sum(hit_time_cap(m) for m in MATCHES)
     items = [
-        ("Date", SITE["date"]), ("Venue", SITE["venue"]), ("Time", f'{SITE["start"]} to {SITE["end"]}'),
+        ("Date", SITE["date"]), ("Venue", SITE["venue"]), ("Time", f'{SITE["start"]} to {SITE["end"]} (planned start {SITE["planned_start"]})'),
         ("Courts", f'{SITE["courts"]}, doubles'), ("Teams", f"{len(TEAMS)} pairs, 12 players from Group 2"),
         ("Matches", f"{len(MATCHES)} ({n_cap} ended at the {CAP}-minute cap)"),
         ("Organized by", f'{SITE["group"]}, {SITE["section"]} (team color {SITE["team_color"]})'),
